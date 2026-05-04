@@ -1,0 +1,54 @@
+.not-found-container {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.not-found-container h1 {
+  font-size: 8rem;
+  margin: 0;
+  animation: fadeIn 0.5s ease;
+}
+
+.not-found-container h2 {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.not-found-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.home-link {
+  background: white;
+  color: #667eea;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: transform 0.3s;
+  display: inline-block;
+}
+
+.home-link:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
