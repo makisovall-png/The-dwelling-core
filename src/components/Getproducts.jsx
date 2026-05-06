@@ -4,15 +4,16 @@ import Loader from './Loader';
 import { useNavigate } from 'react-router-dom';
 import './Getproducts.css';
 import Navbar from './Navbar';
+import { useCart } from '../context/CartContext';
 
 const Get_products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { addToCart } = useCart();
   const [activeCategory, setActiveCategory] = useState('all');
 
   const navigate = useNavigate()
-  const img_url = "https://vallary.alwaysdata.net/static/images/"
 
   const fetchProducts = async() =>{
     try{
@@ -114,7 +115,7 @@ const Get_products = () => {
                 <div className="product-card" key={index}>
                   <div className="product-image">
                     <img 
-                      src={img_url + product.product_photo} 
+                      src={product.product_photo} 
                       alt={product.product_name}
                     />
                   </div>
@@ -130,6 +131,13 @@ const Get_products = () => {
                     >
                       Purchase Now
                     </button>
+                    <button 
+                      className="add-to-cart-btn"
+                      onClick={() => addToCart(product)}
+                    >
+                     Add to Cart 🛒
+                    </button>
+                    
                   </div>
                 </div>
               ))

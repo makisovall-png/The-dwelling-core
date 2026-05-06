@@ -1,13 +1,15 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { getCartCount } = useCart();
   
-  // Check if user is logged in
   const isLoggedIn = localStorage.getItem('user') !== null;
+  const cartCount = getCartCount();
   
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -28,19 +30,27 @@ const Navbar = () => {
           Home
         </button>
         
+        <button 
+          className={location.pathname === '/about' ? 'nav-link active' : 'nav-link'}
+          onClick={() => navigate('/about')}
+        >
+          About
+        </button>
+        
         {isLoggedIn ? (
           <>
-            <button 
-              className={location.pathname === '/products' ? 'nav-link active' : 'nav-link'}
-              onClick={() => navigate('/products')}
-            >
-              Products
-            </button>
+            
             <button 
               className={location.pathname === '/addproducts' ? 'nav-link active' : 'nav-link'}
               onClick={() => navigate('/addproducts')}
             >
               Add Product
+            </button>
+            <button 
+              className={location.pathname === '/cart' ? 'nav-link active' : 'nav-link'}
+              onClick={() => navigate('/cart')}
+            >
+              Cart 🛒 {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
             </button>
             <button 
               className="nav-link logout-btn"
@@ -56,12 +66,6 @@ const Navbar = () => {
               onClick={() => navigate('/signin')}
             >
               Sign In
-            </button>
-            <button 
-              className="nav-link"
-              onClick={() => navigate('/signup')}
-            >
-              Sign Up
             </button>
           </>
         )}
