@@ -8,7 +8,10 @@ const Navbar = () => {
   const location = useLocation();
   const { getCartCount } = useCart();
   
-  const isLoggedIn = localStorage.getItem('user') !== null;
+  // Get user data from localStorage
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const isLoggedIn = user.email !== undefined && user.email !== '';
+  const isAdmin = user.role === 'admin';
   const cartCount = getCartCount();
   
   const handleLogout = () => {
@@ -39,12 +42,20 @@ const Navbar = () => {
         
         {isLoggedIn ? (
           <>
-            
+            {/* Only show Add Product button for admin users */}
+            {isAdmin && (
+              <button 
+                className={location.pathname === '/addproducts' ? 'nav-link active' : 'nav-link'}
+                onClick={() => navigate('/addproducts')}
+              >
+                Add Product
+              </button>
+            )}
             <button 
-              className={location.pathname === '/addproducts' ? 'nav-link active' : 'nav-link'}
-              onClick={() => navigate('/addproducts')}
+              className={location.pathname === '/products' ? 'nav-link active' : 'nav-link'}
+              onClick={() => navigate('/products')}
             >
-              Add Product
+              Products
             </button>
             <button 
               className={location.pathname === '/cart' ? 'nav-link active' : 'nav-link'}

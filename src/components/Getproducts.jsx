@@ -14,6 +14,7 @@ const Get_products = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const navigate = useNavigate()
+  const img_url = "https://vallary.alwaysdata.net/static/images/"
 
   const fetchProducts = async() =>{
     try{
@@ -115,7 +116,7 @@ const Get_products = () => {
                 <div className="product-card" key={index}>
                   <div className="product-image">
                     <img 
-                      src={product.product_photo} 
+                      src={img_url + product.product_photo}
                       alt={product.product_name}
                     />
                   </div>

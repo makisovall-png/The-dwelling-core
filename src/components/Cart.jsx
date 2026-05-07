@@ -68,7 +68,10 @@ const Cart = () => {
               <span>Total Amount:</span>
               <span>Ksh {getCartTotal()}</span>
             </div>
-            <button className="checkout-btn" onClick={() => navigate('/makepayment')}>
+            <button 
+              className="checkout-btn" 
+              onClick={() => navigate('/makepayment', { state: { cart: cartItems, total: getCartTotal() } })}
+            >
               Proceed to Checkout
             </button>
             <button className="clear-cart-btn" onClick={clearCart}>

@@ -13,6 +13,9 @@ const SignIn = () => {
   });
   const navigate = useNavigate();
 
+  // List of admin emails (you can add more)
+  const adminEmails = ['admin@designspace.com', 'vallary@gmail.com'];
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,8 +27,16 @@ const SignIn = () => {
     e.preventDefault();
     if (isLogin) {
       console.log('Login:', formData.email, formData.password);
-      // Store user in localStorage to show logged in state
-      localStorage.setItem('user', JSON.stringify({ email: formData.email }));
+      
+      // Check if user is admin
+      const isAdmin = adminEmails.includes(formData.email);
+      
+      // Store user in localStorage with role
+      localStorage.setItem('user', JSON.stringify({ 
+        email: formData.email, 
+        role: isAdmin ? 'admin' : 'user'
+      }));
+      
       // Redirect to products page after login
       navigate('/products');
     } else {
@@ -34,8 +45,14 @@ const SignIn = () => {
         return;
       }
       console.log('Signup:', formData);
-      // Store user in localStorage after signup
-      localStorage.setItem('user', JSON.stringify({ email: formData.email, name: formData.name }));
+      
+      // New signups are regular users (not admin)
+      localStorage.setItem('user', JSON.stringify({ 
+        email: formData.email, 
+        name: formData.name,
+        role: 'user'
+      }));
+      
       // Redirect to products page after signup
       navigate('/products');
     }

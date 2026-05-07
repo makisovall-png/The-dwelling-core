@@ -6,11 +6,11 @@ import Signin from './components/Signin';
 import NotFound from './components/NotFound';
 import Addproducts from './components/Addproducts';
 import Getproducts from './components/Getproducts';
+import Home from './components/Home';
 import Makepayment from './components/Makepayment';
 import { CartProvider } from './context/CartContext';
 import Cart from './components/Cart';
 import About from './components/About';
-
 
 function App() {
   return (
@@ -18,14 +18,14 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path = '/' element = {<Getproducts/>} />
-            <Route path = '/products' element = {<Getproducts/>} />
-            <Route path = '/addproducts' element = {<Addproducts/>} />
+            <Route path = '/' element = {<Home />} />
+            <Route path = '/products' element = {<Getproducts />} />
+            <Route path = '/addproducts' element = {<Addproducts />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path = '/makepayment' element ={<Makepayment/>}/>
+            <Route path = '/makepayment' element ={<Makepayment />} />
             <Route path="/about" element={<About />} />
-            <Route path = '*' element = {<NotFound/>} />
+            <Route path = '*' element = {<NotFound />} />
           </Routes>
         </div>
       </Router>
